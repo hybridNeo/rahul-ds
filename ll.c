@@ -80,6 +80,18 @@ void removeDup(Node **root){
 	}
 }
 
+
+int middle(Node **root){
+	Node *fast = *root;
+	Node *slow = *root;
+
+	while(fast != NULL && fast->next != NULL){
+		//printf("%d %d \n",fast->val,slow->val );
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	return slow->val;
+}
 void insert(int val,Node **root){
 	if(*root == NULL){
 		
@@ -147,6 +159,21 @@ int loopfinder(Node **root){
 	}
 	return -1;
 }
+
+int nthNode(int n,Node **root){
+	Node *fast = *root;
+	Node *slow = *root;
+	int i = 0;
+	while(i < n){
+		fast= fast->next;
+		i++;
+	}
+	while(fast != NULL){
+		fast = fast->next;
+		slow = slow->next;
+	}
+	return slow->val;
+}
 int isPallindrome(Node **root ,int size){	
 	if(size<=1){
 		return 1;
@@ -190,8 +217,11 @@ int main(void){
 	insert(2,&root);
 	insert(3,&root);
 	insert(4,&root);
+	insert(5,&root);	
+	insert(6,&root);
 	display(&root);
-	reverse(&root);
+//	reverse(&root);
 	printf("\n");
+	printf(" 2nd node from n is is %d \n",nthNode(2,&root));
 	display(&root);
 }
